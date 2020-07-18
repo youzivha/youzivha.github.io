@@ -1,6 +1,6 @@
 # youzivha.github.io
-柚子的静态地址
-[2019年7月12日备份书签](https://youzivha.github.io/shuqian/360bookmarks_2019_7_12.html)
+## 柚子的静态地址
+
 ## 常用网站  
 - [微博](https://weibo.com/)
 - [github](https://github.com/sqwjj)
