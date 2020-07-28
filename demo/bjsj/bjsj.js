@@ -33,7 +33,7 @@ function bjsj(){
   var hsfm = document.getElementById("sfm");
   hsfm.innerText = sfm;
   hnyr.innerText = nyr;
-  document.title = title +'星辰大海，为你而来'
+  document.title = title +' 星辰大海，为你而来'
 
 }
 window.setInterval("bjsj()",1000)
