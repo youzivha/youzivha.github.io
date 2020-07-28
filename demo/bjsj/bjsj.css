@@ -1,0 +1,23 @@
+body{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: black;
+  font-family: "宋体";
+}
+.bjsj{
+  width: 80%;
+  margin: 100px auto;
+  text-align: center;
+  color: white;
+}
+.nyr{
+  width: 100%;
+  font-size: 30px;
+  
+}
+.sfm{
+  width: 100%;
+  font-size: 150px;
+  margin-top: 60px;
+}
