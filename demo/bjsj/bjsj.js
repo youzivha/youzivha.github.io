@@ -13,7 +13,7 @@ function bjsj(){
   var xingqi = now.getDay();
   var hours = now.getHours();
   if(hours < 10){
-    hours = "0" + min;
+    hours = "0" + hours;
   }
   var min = now.getMinutes();
   if(min < 10){
