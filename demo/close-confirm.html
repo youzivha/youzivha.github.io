@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防误关闭网页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e0f7fa, #f5f5f5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .tip {
+            font-size: 16px;
+            color: #7f8c8d;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .warn {
+            display: inline-block;
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">✅ 防误关闭保护已开启</h1>
+        <p class="warn">关闭或刷新页面时会自动弹出确认提醒</p>
+        <p class="tip">
+            本页面已启用浏览器关闭保护<br>
+            适用于表单填写、重要编辑、考试、直播等不希望意外关闭的场景
+        </p>
+        <p class="status">保护状态：已激活</p>
+    </div>
+
+    <script>
+        // 核心：监听页面关闭/刷新事件
+        window.addEventListener('beforeunload', function (e) {
+            // 标准提示语（大部分浏览器会强制使用自带文字，无法自定义）
+            const message = "确定要离开此页面吗？未保存的内容可能会丢失！";
+            
+            // 兼容所有浏览器写法
+            (e || window.event).returnValue = message;
+            return message;
+        });
+    </script>
+</body>
+</html>
