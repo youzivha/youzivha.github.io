@@ -78,7 +78,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title">🔒 小马的网页防误关闭保护</h1>
+        <h1 class="title">🔒 小马不关网页</h1>
         <p class="tip">点击下方按钮后，关闭/刷新页面会弹出确认提醒<br>防止意外关闭丢失内容</p>
         
         <button id="enableBtn">帅哥请点击</button>
@@ -94,8 +94,8 @@
         enableBtn.addEventListener('click', function() {
             isProtected = true;
             enableBtn.disabled = true;
-            enableBtn.textContent = "✅ 已生效，为你护航";
-            statusText.textContent = "已激活，认真工作";
+            enableBtn.textContent = "✅ 已生效，帅哥请上班";
+            statusText.textContent = "为你护航，认真工作，💪";
             statusText.classList.add('active');
         });
 
