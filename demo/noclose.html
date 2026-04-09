@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>防误关闭网页</title>
+    <title>不关网页</title>
     <style>
         * {
             margin: 0;
@@ -78,10 +78,10 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title">🔒 网页防误关闭保护</h1>
+        <h1 class="title">🔒 小马的网页防误关闭保护</h1>
         <p class="tip">点击下方按钮后，关闭/刷新页面会弹出确认提醒<br>防止意外关闭丢失内容</p>
         
-        <button id="enableBtn">请点击后生效</button>
+        <button id="enableBtn">帅哥请点击</button>
         <div class="status" id="statusText">保护状态：未激活</div>
     </div>
 
@@ -94,8 +94,8 @@
         enableBtn.addEventListener('click', function() {
             isProtected = true;
             enableBtn.disabled = true;
-            enableBtn.textContent = "✅ 已生效";
-            statusText.textContent = "保护状态：已激活";
+            enableBtn.textContent = "✅ 已生效，为你护航";
+            statusText.textContent = "已激活，认真工作";
             statusText.classList.add('active');
         });
 
@@ -103,7 +103,7 @@
         window.addEventListener('beforeunload', function(e) {
             if (!isProtected) return; // 未激活则不弹窗
             
-            const msg = "确定要离开吗？未保存的内容可能会丢失！";
+            const msg = "宝下班了吗？未保存的内容可能会丢失！";
             e.returnValue = msg;
             return msg;
         });
