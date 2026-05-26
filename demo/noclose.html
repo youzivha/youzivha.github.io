@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>不关网页</title>
+    <title>❌ 未生效，无法保证防止误关网页</title>
     <style>
         * {
             margin: 0;
@@ -97,6 +97,9 @@
             enableBtn.textContent = "✅ 已生效，帅哥请上班";
             statusText.textContent = "为你护航，认真工作，💪";
             statusText.classList.add('active');
+            
+            // 2. 点击后动态修改网页标题
+            document.title = "✅ 已生效，防止误关网页";
         });
 
         // 关闭/刷新提醒
