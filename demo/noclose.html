@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>❌ 未生效，无法保证防止误关网页</title>
+    <title>🔒 小马不关网页</title>
     <style>
         * {
             margin: 0;
@@ -86,30 +86,67 @@
     </div>
 
     <script>
-        let isProtected = false;
         const enableBtn = document.getElementById('enableBtn');
         const statusText = document.getElementById('statusText');
+        const STORAGE_KEY = 'page_close_protection_active';
+        let worker = null;
 
-        // 点击按钮激活保护
-        enableBtn.addEventListener('click', function() {
-            isProtected = true;
+        // 激活保护的核心函数
+        function activateProtection() {
+            localStorage.setItem(STORAGE_KEY, 'true');
             enableBtn.disabled = true;
             enableBtn.textContent = "✅ 已生效，帅哥请上班";
-            statusText.textContent = "为你护航，认真工作，💪";
+            statusText.textContent = "后台心跳已挂载，稳固护航中...💪";
             statusText.classList.add('active');
-            
-            // 2. 点击后动态修改网页标题
             document.title = "✅ 已生效，防止误关网页";
+
+            // 开启后台保活心跳
+            startHeartbeat();
+        }
+
+        // 核心技术：用 Web Worker 维持后台心跳，对抗浏览器休眠
+        function startHeartbeat() {
+            if (window.Worker) {
+                // 用 Blob 的方式直接在代码里写 Worker，免去多带一个 JS 文件的麻烦
+                const blob = new Blob([`
+                    setInterval(() => {
+                        postMessage('ping');
+                    }, 30000); // 每 30 秒唤醒一次主线程
+                `], { type: 'application/javascript' });
+                
+                worker = new Worker(URL.createObjectURL(blob));
+                
+                // 收到后台心跳后，主线程刷一下本地存储，证明自己还活着
+                worker.onmessage = function() {
+                    localStorage.setItem('last_heartbeat', Date.now());
+                };
+            }
+        }
+
+        // 页面刚加载时，自动检查并恢复状态（防止假死刷新后失效）
+        if (localStorage.getItem(STORAGE_KEY) === 'true') {
+            activateProtection();
+        }
+
+        // 手动点击开启
+        enableBtn.addEventListener('click', function() {
+            activateProtection();
         });
 
-        // 关闭/刷新提醒
+        // 拦截关闭事件
         window.addEventListener('beforeunload', function(e) {
-            if (!isProtected) return; // 未激活则不弹窗
+            if (localStorage.getItem(STORAGE_KEY) !== 'true') return;
             
-            const msg = "宝下班了吗？未保存的内容可能会丢失！";
-            e.returnValue = msg;
-            return msg;
+            // 现代浏览器标准写法
+            e.preventDefault(); 
+            e.returnValue = ''; 
+            return '';
         });
+
+        // 每天第一次打开，如果想重置状态，可以在标签页被正常关闭时清除（可选）
+        // window.addEventListener('unload', function() {
+        //     localStorage.removeItem(STORAGE_KEY);
+        // });
     </script>
 </body>
 </html>
